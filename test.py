@@ -35,6 +35,16 @@ class TestProgram(unittest.TestCase):
         self.assertEqual(bananas('bananaaa'), {'banan-a-', 'banana--', 'banan--a'})
         self.assertEqual(bananas('bananana'), {'ban--ana', 'ba--nana', 'bana--na', 'b--anana', 'banana--', 'banan--a'})
 
+    def test_bananas_2(self):
+        self.assertEqual(bananas_2('banann'), set())
+        self.assertEqual(bananas_2('banana'), {'banana'})
+        self.assertEqual(bananas_2('bbananana'), {'b-an--ana', '-banana--', '-b--anana', 'b-a--nana', '-banan--a',
+                                                  'b-ana--na', 'b---anana', '-bana--na', '-ba--nana', 'b-anan--a',
+                                                  '-ban--ana', 'b-anana--'})
+        self.assertEqual(bananas_2('bananaaa'), {'banan-a-', 'banana--', 'banan--a'})
+        self.assertEqual(bananas_2('bananana'),
+                         {'ban--ana', 'ba--nana', 'bana--na', 'b--anana', 'banana--', 'banan--a'})
+
     def test_count(self):
         primesL = [2, 3]
         limit = 200

@@ -1,5 +1,5 @@
 import math
-from itertools import product
+from itertools import product, combinations
 
 
 def domain_name(url):
@@ -18,12 +18,24 @@ def zeros(n):
 def bananas(s) -> set:
     result = set()
     word = 'banana'
-    diff_len = len(s) - len(word)
-    options = (x for x in product((' ', '-'), repeat=len(s)) if x.count('-') == diff_len)
+    options = (x for x in product((' ', '-'), repeat=len(s)) if x.count('-') == (len(s) - len(word)))
     for var in options:
         new_str = ''.join(a if b == ' ' else b for b, a in zip(var, s))
         if new_str.replace('-', '') == word:
             result.add(new_str)
+    return result
+
+
+def bananas_2(s) -> set:
+    result = set()
+    word = 'banana'
+    for combo in combinations(range(len(s)), len(s) - len(word)):
+        list_s = list(s)
+        for index in combo:
+            list_s[index] = '-'
+        option = ''.join(list_s)
+        if option.replace('-', '') == word:
+            result.add(option)
     return result
 
 
@@ -55,4 +67,5 @@ if __name__ == '__main__':
     print(int32_to_ip(2154959208))
     print(zeros(1000))
     print(bananas('bbananana'))
+    print(bananas_2('bbananana'))
     print(count_find_num([2, 3, 5], 200))
